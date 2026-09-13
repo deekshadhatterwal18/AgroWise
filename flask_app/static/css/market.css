@@ -1,0 +1,148 @@
+/* ---------- Page layout ---------- */
+
+.market-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+}
+
+.market-header h1 {
+    margin: 4px 0 8px;
+    font-size: 28px;
+}
+
+.market-header .small-title {
+    letter-spacing: 1px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #4b7c4a;
+    text-transform: uppercase;
+}
+
+.back-link {
+    margin-right: 16px;
+    text-decoration: none;
+    color: inherit;
+    font-weight: 500;
+}
+
+/* ---------- Filters row ---------- */
+
+.market-filters {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    margin: 24px 0;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 200px;
+}
+
+.filter-group label {
+    font-size: 13px;
+    color: #555;
+    font-weight: 600;
+}
+
+.filter-group select {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #d5d9d3;
+    font-size: 14px;
+}
+
+.market-filters button {
+    padding: 11px 24px;
+    border-radius: 8px;
+    border: none;
+    background-color: #3f7d3a;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    height: fit-content;
+}
+
+.market-filters button:hover {
+    background-color: #316530;
+}
+
+/* ---------- Error / loading ---------- */
+
+.market-error {
+    background-color: #fdecea;
+    color: #b3261e;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.market-loading {
+    color: #666;
+    margin-bottom: 16px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ---------- Summary cards ---------- */
+
+.market-summary {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+.summary-card {
+    background-color: #f4faf2;
+    border-radius: 12px;
+    padding: 16px 20px;
+    flex: 1;
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* The "Your State's Price" card — same shape, amber accent
+   so it visually matches the highlighted bar in the chart */
+.highlight-card {
+    background-color: #fdf1e0;
+    border: 1px solid #e08a1e;
+}
+
+.summary-label {
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 6px;
+}
+
+.summary-value {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.summary-date {
+    font-size: 12px;
+    color: #999;
+    margin-top: 4px;
+}
+
+/* ---------- Chart section ---------- */
+
+.market-chart-section {
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.market-chart-section h3 {
+    margin-top: 0;
+    margin-bottom: 16px;
+}

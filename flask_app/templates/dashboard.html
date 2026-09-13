@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | AgroWise</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            <span>🌱</span>
+            AgroWise
+        </div>
+
+        <div class="nav-right">
+            <span class="user-name">👋 {{ name }}</span>
+            <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        </div>
+    </header>
+
+
+    <main class="dashboard-container">
+
+        <section class="welcome-section">
+            <div>
+                <p class="small-title">FARMER DASHBOARD</p>
+                <h1>Welcome, {{ name }} 👋</h1>
+                <p>Manage your farming activities with AgroWise smart agriculture tools.</p>
+            </div>
+        </section>
+
+
+        <section class="services-section">
+
+            <div class="section-heading">
+                <h2>Smart Agriculture Services</h2>
+                <p>Choose a service to get started.</p>
+            </div>
+
+            <div class="service-grid">
+
+                <div class="service-card">
+                    <div class="service-icon">🌱</div>
+                    <h3>Crop Recommendation</h3>
+                    <p>Find the most suitable crop based on your soil and conditions.</p>
+                    <a href="{{ url_for('crop_recommendation') }}" class="detect-link">
+                        Get Recommendation
+                    </a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📈</div>
+                    <h3>Yield Prediction</h3>
+                    <p>Estimate the expected yield of your selected crop.</p>
+                    <a href="{{ url_for('yield_prediction') }}" class="detect-link">
+                        Predict Yield
+                    </a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🦠</div>
+                    <h3>Disease Detection</h3>
+                    <p>Detect possible plant diseases using AI-powered analysis.</p>
+                    <a href="{{ url_for('disease_detection') }}" class="detect-link">
+                        Detect Disease
+                    </a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🌦️</div>
+                    <h3>Weather Forecast</h3>
+                    <p>Check weather information for better farming decisions.</p>
+                    <a href="{{ url_for('weather_page') }}" class="detect-link">
+                        Check Weather
+                    </a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">💰</div>
+                    <h3>Market Analysis</h3>
+                    <p>Explore agricultural market information and trends.</p>
+                    <a href="{{ url_for('market_page') }}" class="detect-link">
+                        View Market Trends
+                    </a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">👨‍🌾</div>
+                    <h3>Farmer Connect</h3>
+                    <p>Ask questions, share tips, and connect with fellow farmers.</p>
+                    <a href="{{ url_for('farmer_connect') }}" class="detect-link">
+                        Visit Community
+                    </a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🤖</div>
+                    <h3>AgroWise Chatbot</h3>
+                    <p>Ask any farming-related question and get instant AI answers.</p>
+                    <a href="{{ url_for('chatbot_page') }}" class="detect-link">
+                        Chat Now
+                    </a>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="account-section">
+            <h2>Your Account</h2>
+            <div class="account-card">
+                <div>
+                    <span>Name</span>
+                    <strong>{{ name }}</strong>
+                </div>
+                <div>
+                    <span>Email</span>
+                    <strong>{{ email }}</strong>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    {% include "chatbot_widget.html" %}
+    {% include "footer.html" %}
+
+</body>
+</html>

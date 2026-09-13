@@ -1,0 +1,216 @@
+/* ---------- Page layout ---------- */
+
+.forum-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+}
+
+.forum-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.forum-header h1 {
+    margin: 4px 0 8px;
+    font-size: 26px;
+}
+
+.forum-header .small-title {
+    letter-spacing: 1px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #4b7c4a;
+    text-transform: uppercase;
+}
+
+.back-link {
+    margin-right: 16px;
+    text-decoration: none;
+    color: inherit;
+    font-weight: 500;
+}
+
+.new-post-btn {
+    background-color: #3f7d3a;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    height: fit-content;
+}
+
+.new-post-btn:hover {
+    background-color: #316530;
+}
+
+/* ---------- Flash messages ---------- */
+
+.flash-message {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.flash-success {
+    background-color: #e6f4ea;
+    color: #1e7e34;
+}
+
+.flash-error {
+    background-color: #fdecea;
+    color: #b3261e;
+}
+
+/* ---------- Post feed ---------- */
+
+.post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.post-card {
+    display: block;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 18px 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.15s ease;
+}
+
+.post-card:hover {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.post-title {
+    margin: 0 0 6px;
+    font-size: 18px;
+}
+
+.post-preview {
+    margin: 0 0 10px;
+    color: #555;
+    font-size: 14px;
+}
+
+.post-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    color: #888;
+}
+
+.empty-state {
+    color: #888;
+    text-align: center;
+    padding: 40px 0;
+}
+
+/* ---------- New post form ---------- */
+
+.post-form,
+.add-comment-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.post-form label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    margin-top: 6px;
+}
+
+.post-form input,
+.post-form textarea,
+.add-comment-section textarea {
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #d5d9d3;
+    font-size: 14px;
+    font-family: inherit;
+    resize: vertical;
+}
+
+.submit-btn {
+    align-self: flex-start;
+    padding: 11px 28px;
+    border-radius: 8px;
+    border: none;
+    background-color: #3f7d3a;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.submit-btn:hover {
+    background-color: #316530;
+}
+
+/* ---------- Post detail page ---------- */
+
+.post-detail-card {
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.post-detail-title {
+    margin: 0 0 10px;
+    font-size: 24px;
+}
+
+.post-detail-content {
+    margin-top: 16px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+/* ---------- Comments ---------- */
+
+.comments-section {
+    margin-bottom: 24px;
+}
+
+.comment-card {
+    background-color: #f7f9f6;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+}
+
+.comment-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 6px;
+}
+
+.comment-content {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.add-comment-section {
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.add-comment-section h3 {
+    margin-top: 0;
+}

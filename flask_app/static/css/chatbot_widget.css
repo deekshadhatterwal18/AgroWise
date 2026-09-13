@@ -1,0 +1,171 @@
+#chatbot-widget {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+#chatbot-toggle-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #2e7d32;
+    color: white;
+    border: none;
+    font-size: 26px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease;
+}
+
+#chatbot-toggle-btn:hover {
+    transform: scale(1.08);
+}
+
+#chatbot-panel {
+    position: fixed;
+    bottom: 96px;
+    right: 24px;
+    width: 340px;
+    height: 460px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#chatbot-panel.hidden {
+    display: none;
+}
+
+.chatbot-panel-header {
+    background: #2e7d32;
+    color: white;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.chatbot-header-btns {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#chatbot-close-btn,
+#chatbot-expand-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+#chatbot-close-btn {
+    font-size: 20px;
+}
+
+/* Fullscreen state - jab expand button click hota hai */
+#chatbot-panel.fullscreen {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+}
+
+#chatbot-panel.fullscreen .chatbot-panel-messages {
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.chatbot-panel-messages {
+    flex: 1;
+    padding: 14px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #fafafa;
+}
+
+.chat-msg {
+    padding: 9px 13px;
+    border-radius: 12px;
+    font-size: 13.5px;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    max-width: 85%;
+}
+
+.chat-msg.bot-msg {
+    background: #e8f5e9;
+    color: #1b1b1b;
+    align-self: flex-start;
+    border-bottom-left-radius: 3px;
+}
+
+.chat-msg.user-msg {
+    background: #2e7d32;
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 3px;
+}
+
+.chat-msg.loading {
+    font-style: italic;
+    color: #666;
+}
+
+.chat-msg.error {
+    background: #fdecea;
+    color: #c0392b;
+}
+
+.chat-msg.sources {
+    font-size: 11.5px;
+    color: #666;
+    background: transparent;
+    padding: 2px 4px;
+}
+
+.chatbot-panel-input {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #eee;
+    gap: 8px;
+}
+
+#widget-chat-input {
+    flex: 1;
+    padding: 9px 12px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 13.5px;
+    outline: none;
+}
+
+#widget-chat-input:focus {
+    border-color: #2e7d32;
+}
+
+.chatbot-panel-input button[type="submit"] {
+    background: #2e7d32;
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+}

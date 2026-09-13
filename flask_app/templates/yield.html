@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yield Prediction | AgroWise</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+<div class="logo"><span>🌱</span> AgroWise</div>
+<div class="nav-right">
+<a href="{{ url_for('dashboard') }}" class="back-link">← Dashboard</a>
+<a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+</div>
+</header>
+
+<main class="chatbot-container">
+<h1>📈 Yield Prediction</h1>
+<p class="subtitle">Enter your crop and field details to estimate expected yield.</p>
+
+<form id="yield-form">
+
+<label for="crop">Crop</label>
+<select name="Crop" id="crop" required>
+{% for crop in crops %}
+<option value="{{ crop }}">{{ crop }}</option>
+{% endfor %}
+</select>
+
+<label for="season">Season</label>
+<select name="Season" id="season" required>
+{% for season in seasons %}
+<option value="{{ season }}">{{ season }}</option>
+{% endfor %}
+</select>
+
+<label for="state">State</label>
+<select name="State" id="state" required>
+{% for state in states %}
+<option value="{{ state }}">{{ state }}</option>
+{% endfor %}
+</select>
+
+<!--
+    Ranges below come directly from Crop_Yield_Data.csv (min/max of each column).
+    NOTE: this dataset reports Area, Fertilizer and Pesticide as district/state-level
+    TOTALS for the year, not a single farmer's field. So these three sliders span a
+    very large range and most everyday values will sit near the low end. Temperature
+    and rainfall ranges are realistic and comfortable to use as-is.
+-->
+
+<div class="slider-group">
+    <label for="area">Area (hectares) <span class="slider-value" id="area-value">10000</span></label>
+    <input type="range" id="area" name="Area" min="0" max="50808100" step="1000" value="10000"
+        oninput="document.getElementById('area-value').textContent=this.value">
+</div>
+
+<div class="slider-group">
+    <label for="rainfall">Annual Rainfall (mm) <span class="slider-value" id="rainfall-value">1250</span></label>
+    <input type="range" id="rainfall" name="Annual_Rainfall" min="300" max="6600" step="10" value="1250"
+        oninput="document.getElementById('rainfall-value').textContent=this.value">
+</div>
+
+<div class="slider-group">
+    <label for="fertilizer">Fertilizer used (kg) <span class="slider-value" id="fertilizer-value">1000000</span></label>
+    <input type="range" id="fertilizer" name="Fertilizer" min="0" max="4835406877" step="100000" value="1000000"
+        oninput="document.getElementById('fertilizer-value').textContent=this.value">
+</div>
+
+<div class="slider-group">
+    <label for="pesticide">Pesticide used (kg) <span class="slider-value" id="pesticide-value">2000</span></label>
+    <input type="range" id="pesticide" name="Pesticide" min="0" max="15750511" step="1000" value="2000"
+        oninput="document.getElementById('pesticide-value').textContent=this.value">
+</div>
+
+<div class="slider-group">
+    <label for="avg-temp">Avg Temperature (°C) <span class="slider-value" id="avg-temp-value">25</span></label>
+    <input type="range" id="avg-temp" name="Avg_Temperature" min="-5" max="29" step="1" value="25"
+        oninput="document.getElementById('avg-temp-value').textContent=this.value">
+</div>
+
+<div class="slider-group">
+    <label for="max-temp">Max Temperature (°C) <span class="slider-value" id="max-temp-value">36</span></label>
+    <input type="range" id="max-temp" name="Max_Temperature" min="7" max="41" step="1" value="36"
+        oninput="document.getElementById('max-temp-value').textContent=this.value">
+</div>
+
+<div class="slider-group">
+    <label for="min-temp">Min Temperature (°C) <span class="slider-value" id="min-temp-value">16</span></label>
+    <input type="range" id="min-temp" name="Min_Temperature" min="-20" max="25" step="1" value="16"
+        oninput="document.getElementById('min-temp-value').textContent=this.value">
+</div>
+
+<button type="submit">Predict Yield</button>
+</form>
+
+<div id="yield-result"></div>
+</main>
+
+<script>
+        document.getElementById("yield-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const form = e.target;
+
+            const data = {
+                Crop: form.Crop.value,
+                Season: form.Season.value,
+                State: form.State.value,
+                Area: form.Area.value,
+                Annual_Rainfall: form.Annual_Rainfall.value,
+                Fertilizer: form.Fertilizer.value,
+                Pesticide: form.Pesticide.value,
+                Avg_Temperature: form.Avg_Temperature.value,
+                Max_Temperature: form.Max_Temperature.value,
+                Min_Temperature: form.Min_Temperature.value,
+            };
+
+            const resultDiv = document.getElementById("yield-result");
+            resultDiv.textContent = "Predicting...";
+
+            try {
+                const res = await fetch("/api/yield/predict", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+                const result = await res.json();
+
+                if (result.success) {
+                    resultDiv.textContent = "Predicted Yield: " + result.predicted_yield + " units/hectare";
+                } else {
+                    resultDiv.textContent = "Error: " + result.error;
+                }
+            } catch (err) {
+                resultDiv.textContent = "Something went wrong.";
+            }
+        });
+</script>
+</body>
+</html>

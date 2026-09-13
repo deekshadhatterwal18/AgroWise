@@ -1,0 +1,298 @@
+.chatbot-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.chatbot-container h1 {
+    margin-bottom: 4px;
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.chat-window {
+    height: 450px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+    background: #fafafa;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chat-msg {
+    max-width: 75%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
+.user-msg {
+    align-self: flex-end;
+    background: #2e7d32;
+    color: white;
+}
+
+.bot-msg {
+    align-self: flex-start;
+    background: #e8f5e9;
+    color: #1b1b1b;
+}
+
+.bot-msg.error {
+    background: #ffebee;
+    color: #b71c1c;
+}
+
+.bot-msg.loading {
+    font-style: italic;
+    color: #777;
+}
+
+.bot-msg.sources {
+    font-size: 0.8rem;
+    color: #555;
+    background: none;
+    border-top: 1px dashed #ccc;
+    padding-top: 6px;
+}
+
+#chat-form {
+    display: flex;
+    gap: 8px;
+}
+
+#chat-input {
+    flex: 1;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+#chat-form button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #2e7d32;
+    color: white;
+    cursor: pointer;
+}
+
+#chat-form button:hover {
+    background: #256428;
+}
+
+/* Shared form styling for crop.html and yield.html */
+
+.chatbot-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.chatbot-container form input,
+.chatbot-container form select {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.chatbot-container form label {
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #333;
+}
+
+.chatbot-container form button[type="submit"] {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #2e7d32;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.chatbot-container form button[type="submit"]:hover {
+    background: #256428;
+}
+
+#crop-result,
+#yield-result {
+    margin-top: 16px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #1b1b1b;
+}
+
+.back-link {
+    margin-right: 16px;
+    text-decoration: none;
+    color: #2e7d32;
+    font-weight: 600;
+}
+
+.navbar {
+    height: 84px !important;
+    padding: 0 6% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    background: #ffffff !important;
+    border-bottom: 1px solid #e7eee9 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.navbar .logo {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    font-size: 25px !important;
+    font-weight: 700 !important;
+    color: #16783a !important;
+}
+
+.navbar .logo span {
+    font-size: 28px;
+}
+
+.navbar .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar .back-link {
+    color: #27362d;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: 1px solid #d9e6dd;
+    transition: 0.2s;
+}
+
+.navbar .back-link:hover {
+    background: #edf8f0;
+    color: #16813e;
+    border-color: #16813e;
+}
+
+.navbar .logout-btn {
+    padding: 11px 22px;
+    background: #087d3d;
+    color: #ffffff !important;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.navbar .logout-btn:hover {
+    background: #066b34;
+}
+
+
+/* ============================================
+   Page background: soft green tint on the
+   outer container, white on the actual form
+   ============================================ */
+
+.chatbot-container {
+    background: linear-gradient(180deg, #f2f9f4 0%, #ffffff 55%);
+    min-height: calc(100vh - 84px);
+    padding: 50px 6% 80px;
+}
+
+.chatbot-container h1 {
+    color: #173c27;
+}
+
+.chatbot-container .subtitle {
+    color: #5a6a60;
+    margin-bottom: 30px;
+}
+
+#yield-form,
+#crop-form {
+    background: #ffffff;
+    max-width: 560px;
+    padding: 32px;
+    border-radius: 16px;
+    border: 1px solid #e3eae6;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#yield-form label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #27362d;
+    margin-bottom: -8px;
+}
+
+#yield-form input,
+#yield-form select,
+#crop-form input {
+    width: 100%;
+    padding: 12px 14px;
+    background: #ffffff;
+    border: 1px solid #d9e2dc;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #1d2b23;
+    outline: none;
+    transition: 0.2s;
+}
+
+#yield-form input:focus,
+#yield-form select:focus,
+#crop-form input:focus {
+    border-color: #16813e;
+    box-shadow: 0 0 0 3px rgba(22, 129, 62, 0.1);
+}
+
+#yield-form button,
+#crop-form button {
+    margin-top: 8px;
+    padding: 14px;
+    background: #087d3d;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#yield-form button:hover,
+#crop-form button:hover {
+    background: #066b34;
+}
+
+#yield-result,
+#crop-result {
+    max-width: 560px;
+    margin-top: 20px;
+    padding: 16px 20px;
+    background: #ffffff;
+    border: 1px solid #e3eae6;
+    border-radius: 10px;
+    font-weight: 600;
+}

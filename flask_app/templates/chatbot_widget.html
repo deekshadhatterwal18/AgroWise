@@ -1,0 +1,39 @@
+<!-- Floating Chatbot Widget - isko har template me </body> se pehle include karo -->
+
+<div id="chatbot-widget">
+
+    <button id="chatbot-toggle-btn">💬</button>
+
+    <div id="chatbot-panel" class="hidden">
+
+        <div class="chatbot-panel-header">
+            <span>🌾 groWise Assistant</span>
+            <div class="chatbot-header-btns">
+                <button id="chatbot-expand-btn" title="Expand">⛶</button>
+                <button id="chatbot-close-btn">&times;</button>
+            </div>
+        </div>
+
+        <div id="widget-chat-window" class="chatbot-panel-messages">
+            <div class="chat-msg bot-msg">
+                Namaste! Ask me anything about farming.
+            </div>
+        </div>
+
+        <form id="widget-chat-form" class="chatbot-panel-input">
+            <input
+                type="text"
+                id="widget-chat-input"
+                placeholder="Type your question..."
+                autocomplete="off"
+            >
+            <button type="submit">➤</button>
+        </form>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot_widget.css') }}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js"></script>
+<script src="{{ url_for('static', filename='js/chatbot_widget.js') }}"></script>

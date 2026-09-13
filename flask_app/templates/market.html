@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Analysis | AgroWise</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/market.css') }}">
+
+    <!-- Chart.js from CDN — draws the bar chart -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo"><span>🌱</span> AgroWise</div>
+        <div class="nav-right">
+            <a href="{{ url_for('dashboard') }}" class="back-link">← Dashboard</a>
+            <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        </div>
+    </header>
+
+
+    <main class="market-container">
+
+        <section class="market-header">
+            <p class="small-title">MARKET ANALYSIS</p>
+            <h1>💰 Crop Price Comparison</h1>
+            <p>Select a crop to compare its average price (₹/kg) across states — pick your state to highlight it.</p>
+        </section>
+
+        <section class="market-filters">
+
+            <div class="filter-group">
+                <label for="commodity-select">Crop</label>
+                <select id="commodity-select">
+                    <option value="">-- Select crop --</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="state-select">Your State (optional)</label>
+                <select id="state-select">
+                    <option value="">-- None --</option>
+                </select>
+            </div>
+
+            <button id="market-search-btn">Compare Prices</button>
+
+        </section>
+
+        <p id="market-error" class="market-error hidden"></p>
+        <p id="market-loading" class="market-loading hidden">Loading price data...</p>
+
+        <!-- Summary cards: average / highest / lowest / (optional) your state -->
+        <section id="market-summary" class="market-summary hidden">
+
+            <div class="summary-card">
+                <span class="summary-label">Average Price (all states)</span>
+                <span class="summary-value" id="summary-avg">--</span>
+            </div>
+
+            <div class="summary-card">
+                <span class="summary-label">Highest Price</span>
+                <span class="summary-value" id="summary-highest">--</span>
+            </div>
+
+            <div class="summary-card">
+                <span class="summary-label">Lowest Price</span>
+                <span class="summary-value" id="summary-lowest">--</span>
+            </div>
+
+            <!-- Only shown when the farmer picked a state -->
+            <div class="summary-card highlight-card hidden" id="your-state-card">
+                <span class="summary-label">Your State's Price</span>
+                <span class="summary-value" id="summary-your-state">--</span>
+            </div>
+
+        </section>
+
+        <!-- Bar chart: one bar per state, selected state highlighted -->
+        <section id="market-chart-section" class="market-chart-section hidden">
+            <h3>Average Price by State (₹/kg)</h3>
+            <canvas id="price-chart" height="120"></canvas>
+        </section>
+
+    </main>
+
+    <script src="{{ url_for('static', filename='js/market.js') }}"></script>
+
+</body>
+
+</html>

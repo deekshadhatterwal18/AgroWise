@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crop Recommendation | AgroWise</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+<div class="logo"><span>🌱</span> AgroWise</div>
+<div class="nav-right">
+<a href="{{ url_for('dashboard') }}" class="back-link">← Dashboard</a>
+<a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+</div>
+</header>
+
+<main class="chatbot-container">
+<h1>🌱 Crop Recommendation</h1>
+<p class="subtitle">Enter your soil and climate values to get the best crop suggestion.</p>
+
+<form id="crop-form">
+
+<!-- Ranges below come directly from Crop_recommendation.csv (min/max of each column) -->
+
+<div class="slider-group">
+    <label for="N">Nitrogen (N) <span class="slider-value" id="N-value">70</span></label>
+    <input type="range" id="N" name="N" min="0" max="140" step="1" value="70"
+        oninput="document.getElementById('N-value').textContent=this.value">
+</div>
+
+<div class="slider-group">
+    <label for="P">Phosphorus (P) <span class="slider-value" id="P-value">75</span></label>
+    <input type="range" id="P" name="P" min="5" max="145" step="1" value="75"
+        oninput="document.getElementById('P-value').textContent=this.value">
+</div>
+
+<div class="slider-group">
+    <label for="K">Potassium (K) <span class="slider-value" id="K-value">105</span></label>
+    <input type="range" id="K" name="K" min="5" max="205" step="1" value="105"
+        oninput="document.getElementById('K-value').textContent=this.value">
+</div>
+
+<div class="slider-group">
+    <label for="temperature">Temperature (°C) <span class="slider-value" id="temperature-value">26</span></label>
+    <input type="range" id="temperature" name="temperature" min="8" max="44" step="1" value="26"
+        oninput="document.getElementById('temperature-value').textContent=this.value">
+</div>
+
+<div class="slider-group">
+    <label for="humidity">Humidity (%) <span class="slider-value" id="humidity-value">57</span></label>
+    <input type="range" id="humidity" name="humidity" min="14" max="100" step="1" value="57"
+        oninput="document.getElementById('humidity-value').textContent=this.value">
+</div>
+
+<div class="slider-group">
+    <label for="ph">Soil pH <span class="slider-value" id="ph-value">6.7</span></label>
+    <input type="range" id="ph" name="ph" min="3.5" max="10" step="0.1" value="6.7"
+        oninput="document.getElementById('ph-value').textContent=this.value">
+</div>
+
+<div class="slider-group">
+    <label for="rainfall">Rainfall (mm) <span class="slider-value" id="rainfall-value">160</span></label>
+    <input type="range" id="rainfall" name="rainfall" min="20" max="300" step="10" value="160"
+        oninput="document.getElementById('rainfall-value').textContent=this.value">
+</div>
+
+<button type="submit">Get Recommendation</button>
+</form>
+
+<div id="crop-result"></div>
+</main>
+
+<script>
+        document.getElementById("crop-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const data = {
+                N: form.N.value,
+                P: form.P.value,
+                K: form.K.value,
+                temperature: form.temperature.value,
+                humidity: form.humidity.value,
+                ph: form.ph.value,
+                rainfall: form.rainfall.value,
+            };
+
+            const resultDiv = document.getElementById("crop-result");
+            resultDiv.textContent = "Predicting...";
+
+            try {
+                const res = await fetch("/api/crop/predict", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+                const result = await res.json();
+
+                if (result.success) {
+                    let text = "Recommended Crop: " + result.recommended_crop;
+
+                    if (result.top_predictions && result.top_predictions.length > 0) {
+                        text += "\n\nTop matches:\n";
+                        result.top_predictions.forEach(item => {
+                            text += item.crop + " (" + item.confidence + "%)\n";
+                        });
+                    }
+
+                    resultDiv.style.whiteSpace = "pre-line";
+                    resultDiv.textContent = text;
+                } else {
+                    resultDiv.textContent = "Error: " + result.error;
+                }
+            } catch (err) {
+                resultDiv.textContent = "Something went wrong.";
+            }
+        });
+</script>
+</body>
+</html>

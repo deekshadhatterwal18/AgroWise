@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post[1] }} | AgroWise</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/farmer_connect.css') }}">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo"><span>🌱</span> AgroWise</div>
+        <div class="nav-right">
+            <a href="{{ url_for('farmer_connect') }}" class="back-link">← Farmer Connect</a>
+            <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        </div>
+    </header>
+
+
+    <main class="forum-container">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p class="flash-message flash-{{ category }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- The post itself -->
+        <section class="post-detail-card">
+
+            <h1 class="post-detail-title">{{ post[1] }}</h1>
+
+            <div class="post-meta">
+                <span>by {{ post[4] }}</span>
+                <span>{{ post[3].strftime('%d %b %Y, %I:%M %p') }}</span>
+            </div>
+
+            <p class="post-detail-content">{{ post[2] }}</p>
+
+        </section>
+
+        <!-- Comments -->
+        <section class="comments-section">
+
+            <h3>💬 {{ comments|length }} Comments</h3>
+
+            {% if comments %}
+
+                {% for comment in comments %}
+                    <div class="comment-card">
+
+                        <div class="comment-meta">
+                            <strong>{{ comment[2] }}</strong>
+                            <span>{{ comment[1].strftime('%d %b %Y, %I:%M %p') }}</span>
+                        </div>
+
+                        <p class="comment-content">{{ comment[0] }}</p>
+
+                    </div>
+                {% endfor %}
+
+            {% else %}
+                <p class="empty-state">No comments yet — be the first to reply!</p>
+            {% endif %}
+
+        </section>
+
+        <!-- Add a comment -->
+        <section class="add-comment-section">
+
+            <h3>Add a Reply</h3>
+
+            <form method="POST" action="{{ url_for('add_comment', post_id=post[0]) }}">
+
+                <textarea
+                    name="content"
+                    rows="4"
+                    placeholder="Write your reply..."
+                    required
+                ></textarea>
+
+                <button type="submit" class="submit-btn">Reply</button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

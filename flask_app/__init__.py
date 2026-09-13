@@ -1,0 +1,1 @@
+# AgroWise Flask application package

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AgroWise | Smart Agriculture</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/flash_messages.css') }}"
+    >
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            <div class="logo-main">
+                🌱 <span>AgroWise</span>
+            </div>
+
+            <small>
+                Smart Technology for Smarter Farming
+            </small>
+        </div>
+
+        <nav>
+            <a href="#home" class="active">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">AI Services</a>
+            <a href="#farmer-connect">Farmer Connect</a>
+            <a href="#schemes">Schemes</a>
+            <a href="#contact">Contact</a>
+
+            {% if session.user_id %}
+                <a href="{{ url_for('logout') }}" class="login-btn">
+                    Logout
+                </a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="login-btn">
+                    Login / Register
+                </a>
+            {% endif %}
+        </nav>
+
+    </header>
+
+    {% include "flash_messages.html" %}
+
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <p class="tagline">
+                SMART AGRICULTURE PLATFORM
+            </p>
+
+            <h1>
+                Smart Technology for
+                <br>
+                Smarter <span>Farming</span>
+            </h1>
+
+            <p class="hero-text">
+                AI-powered agricultural solutions to help
+                farmers make better decisions about crops,
+                diseases, fertilizers, weather and markets.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a
+                    href="#services"
+                    class="primary-btn"
+                >
+                    🌱 Explore AI Services
+                </a>
+
+                <a
+                    href="#farmer-connect"
+                    class="secondary-btn"
+                >
+                    👨‍🌾 Join Farmer Connect
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-card">
+
+            <div class="feature-item">
+
+                <div class="feature-icon">
+                    🌱
+                </div>
+
+                <div>
+                    <h3>Crop Recommendation</h3>
+
+                    <p>
+                        Find the best crop for your soil
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="feature-item">
+
+                <div class="feature-icon">
+                    📈
+                </div>
+
+                <div>
+                    <h3>Yield Prediction</h3>
+
+                    <p>
+                        Estimate expected crop yield
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="feature-item">
+
+                <div class="feature-icon">
+                    🦠
+                </div>
+
+                <div>
+                    <h3>Disease Detection</h3>
+
+                    <p>
+                        Detect plant diseases early
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="feature-item">
+
+                <div class="feature-icon">
+                    ☁️
+                </div>
+
+                <div>
+                    <h3>Weather Forecast</h3>
+
+                    <p>
+                        Plan your farming smartly
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="services" id="services">
+
+        <div class="section-heading">
+
+            <p>
+                AI POWERED SERVICES
+            </p>
+
+            <h2>
+                Smart Solutions for Modern Farming
+            </h2>
+
+            <span>
+                Technology-driven tools to support better
+                farming decisions.
+            </span>
+
+        </div>
+
+
+        <div class="service-grid">
+
+            <a href="{{ url_for('crop_recommendation') }}" class="service-card">
+
+                <div class="service-icon">
+                    🌾
+                </div>
+
+                <h3>
+                    Crop Recommendation
+                </h3>
+
+                <p>
+                    Get suitable crop suggestions based
+                    on soil and environmental conditions.
+                </p>
+
+            </a>
+
+
+            <a href="{{ url_for('yield_prediction') }}" class="service-card">
+
+                <div class="service-icon">
+                    📊
+                </div>
+
+                <h3>
+                    Yield Prediction
+                </h3>
+
+                <p>
+                    Predict expected crop yield using
+                    agricultural data.
+                </p>
+
+            </a>
+
+
+            <a href="{{ url_for('disease_detection') }}" class="service-card">
+
+                <div class="service-icon">
+                    🌿
+                </div>
+
+                <h3>
+                    Disease Detection
+                </h3>
+
+                <p>
+                    Identify crop diseases using
+                    AI-based image analysis.
+                </p>
+
+            </a>
+
+
+            <a href="{{ url_for('weather_page') }}" class="service-card">
+
+                <div class="service-icon">
+                    🌦️
+                </div>
+
+                <h3>
+                    Weather Forecast
+                </h3>
+
+                <p>
+                    Check weather information useful
+                    for farming decisions.
+                </p>
+
+            </a>
+
+
+            <a href="{{ url_for('market_page') }}" class="service-card">
+
+                <div class="service-icon">
+                    📈
+                </div>
+
+                <h3>
+                    Market Analysis
+                </h3>
+
+                <p>
+                    Understand crop prices and
+                    market trends.
+                </p>
+
+            </a>
+
+
+            <a href="{{ url_for('chatbot_page') }}" class="service-card">
+
+                <div class="service-icon">
+                    🤖
+                </div>
+
+                <h3>
+                    AgroWise Chatbot
+                </h3>
+
+                <p>
+                    Ask any farming-related question
+                    and get instant AI answers.
+                </p>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <section class="about" id="about">
+
+        <div class="about-content">
+
+            <p class="section-label">
+                ABOUT AGROWISE
+            </p>
+
+            <h2>
+                Technology that helps farmers
+                make smarter decisions.
+            </h2>
+
+            <p>
+                AgroWise is a smart agriculture platform built to bring the
+                power of artificial intelligence directly into the hands of
+                farmers. From recommending the right crop for your soil, to
+                predicting yields, detecting plant diseases early, tracking
+                weather patterns, and comparing market prices across states —
+                AgroWise brings together everything a farmer needs to make
+                confident, data-backed decisions.
+            </p>
+
+            <p>
+                We built AgroWise because farming decisions shouldn't rely on
+                guesswork. By combining machine learning models with real-time
+                weather and market data, we help farmers reduce risk, save
+                time, and get better returns on every season's effort.
+                Whether you're choosing your next crop or asking a quick
+                question through our AI assistant, AgroWise is designed to
+                feel like having an expert agronomist available anytime,
+                anywhere.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section class="farmer-connect" id="farmer-connect">
+
+        <div class="connect-content">
+
+            <p class="section-label">
+                FARMER CONNECT
+            </p>
+
+            <h2>
+                Connect, Share and Learn
+            </h2>
+
+            <p>
+                Connect with other farmers, share experiences
+                and learn from the farming community.
+            </p>
+
+            <a
+                href="{{ url_for('farmer_connect') }}"
+                class="primary-btn"
+            >
+                Join Farmer Connect
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <section class="schemes" id="schemes">
+
+        <div class="section-heading">
+
+            <p>
+                GOVERNMENT SCHEMES
+            </p>
+
+            <h2>
+                Explore Agricultural Schemes
+            </h2>
+
+            <span>
+                Find useful information about government
+                schemes and agricultural support programs.
+            </span>
+
+        </div>
+
+        <div class="scheme-grid">
+
+            {% for scheme in schemes %}
+
+                <a
+                    href="{{ scheme.link }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="scheme-card"
+                >
+
+                    <div class="scheme-icon">
+                        {{ scheme.icon }}
+                    </div>
+
+                    <h3>
+                        {{ scheme.name }}
+                    </h3>
+
+                    <p>
+                        {{ scheme.description }}
+                    </p>
+
+                    <span class="scheme-link">
+                        Learn more →
+                    </span>
+
+                </a>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+    <section class="contact" id="contact">
+
+        <div class="section-heading">
+
+            <p>
+                CONTACT
+            </p>
+
+            <h2>
+                Get in Touch
+            </h2>
+
+            <span>
+                Have questions or suggestions?
+                Connect with AgroWise.
+            </span>
+
+        </div>
+
+        <div class="contact-card">
+
+            <div class="contact-icon">
+                📧
+            </div>
+
+            <div class="contact-info">
+                <h3>Email Us</h3>
+                <a href="mailto:deekshadhatterwal150477@gmail.com">
+                    deekshadhatterwal150477@gmail.com
+                </a>
+                <p>We usually respond within 24-48 hours.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+
+        <div class="footer-logo">
+            🌱 AgroWise
+        </div>
+
+        <p>
+            Smart Technology for Smarter Farming
+        </p>
+
+        <p class="footer-credit">
+            Made with ❤️ by <strong>Deeksha Dhatterwal</strong>
+        </p>
+
+        <p class="copyright">
+            © 2026 AgroWise. All rights reserved.
+        </p>
+
+    </footer>
+
+    {% include "chatbot_widget.html" %}
+
+    <script
+        src="{{ url_for('static', filename='js/main.js') }}"
+    ></script>
+
+</body>
+
+</html>

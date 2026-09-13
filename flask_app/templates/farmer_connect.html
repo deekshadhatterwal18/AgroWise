@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Connect | AgroWise</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/farmer_connect.css') }}">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo"><span>🌱</span> AgroWise</div>
+        <div class="nav-right">
+            <a href="{{ url_for('dashboard') }}" class="back-link">← Dashboard</a>
+            <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        </div>
+    </header>
+
+
+    <main class="forum-container">
+
+        <section class="forum-header">
+            <div>
+                <p class="small-title">FARMER CONNECT</p>
+                <h1>👨‍🌾 Community Forum</h1>
+                <p>Ask questions, share tips, and help fellow farmers.</p>
+            </div>
+
+            <a href="{{ url_for('new_post') }}" class="new-post-btn">
+                + New Post
+            </a>
+        </section>
+
+        <!-- Flash messages (success/error) -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p class="flash-message flash-{{ category }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Post list -->
+        <section class="post-list">
+
+            {% if posts %}
+
+                {% for post in posts %}
+                    <a href="{{ url_for('view_post', post_id=post[0]) }}" class="post-card">
+
+                        <h3 class="post-title">{{ post[1] }}</h3>
+
+                        <p class="post-preview">
+                            {{ post[2][:150] }}{% if post[2]|length > 150 %}...{% endif %}
+                        </p>
+
+                        <div class="post-meta">
+                            <span>by {{ post[4] }}</span>
+                            <span>{{ post[3].strftime('%d %b %Y') }}</span>
+                            <span>💬 {{ post[5] }} comments</span>
+                        </div>
+
+                    </a>
+                {% endfor %}
+
+            {% else %}
+                <p class="empty-state">
+                    No posts yet — be the first to start a discussion!
+                </p>
+            {% endif %}
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

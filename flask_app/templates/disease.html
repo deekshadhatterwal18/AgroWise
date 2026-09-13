@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>AgroWise - Disease Detection</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/dashboard.css') }}"
+    >
+
+    <style>
+
+        body {
+            background: #f4f8f4;
+        }
+
+        .disease-container {
+            max-width: 950px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .page-header {
+            margin-bottom: 25px;
+        }
+
+        .page-header h1 {
+            color: #173b25;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #555;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #1f6b3a;
+            font-weight: 600;
+        }
+
+        .upload-card,
+        .result-card {
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .upload-box {
+            border: 2px dashed #9aa79e;
+            border-radius: 14px;
+            padding: 45px 20px;
+            text-align: center;
+        }
+
+        .upload-box h2 {
+            color: #173b25;
+            margin-bottom: 15px;
+        }
+
+        .file-input {
+            margin: 15px 0;
+        }
+
+        #preview {
+            display: none;
+            width: 350px;
+            max-width: 100%;
+            max-height: 350px;
+            object-fit: contain;
+            margin: 20px auto;
+            border-radius: 12px;
+        }
+
+        #detectBtn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 9px;
+            background: #1f6b3a;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #detectBtn:disabled {
+            background: #aaa;
+            cursor: not-allowed;
+        }
+
+        .result-card {
+            display: none;
+        }
+
+        .result-card h2 {
+            color: #173b25;
+            margin-bottom: 25px;
+        }
+
+        .result-row {
+            margin-bottom: 15px;
+            font-size: 17px;
+        }
+
+        .result-row strong {
+            color: #173b25;
+        }
+
+        .message-box {
+            background: #eef7ef;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .info-section {
+            margin-top: 25px;
+        }
+
+        .info-section h3 {
+            color: #173b25;
+            margin-bottom: 8px;
+        }
+
+        .info-section p {
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .info-section ul,
+        .info-section ol {
+            padding-left: 25px;
+            line-height: 1.8;
+        }
+
+        .confidence {
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="disease-container">
+
+        <a
+            href="{{ url_for('dashboard') }}"
+            class="back-btn"
+        >
+            ← Back to Dashboard
+        </a>
+
+
+        <!-- HEADER -->
+
+        <div class="page-header">
+
+            <h1>
+                🌿 Plant Disease Detection
+            </h1>
+
+            <p>
+                Upload a clear crop or leaf image
+                to detect possible plant diseases.
+            </p>
+
+        </div>
+
+
+        <!-- UPLOAD -->
+
+        <div class="upload-card">
+
+            <div class="upload-box">
+
+                <h2>
+                    📷 Upload Leaf Image
+                </h2>
+
+                <p>
+                    Choose a clear image of the
+                    crop or leaf.
+                </p>
+
+
+                <div class="file-input">
+
+                    <input
+                        type="file"
+                        id="imageInput"
+                        accept="image/*"
+                    >
+
+                </div>
+
+
+                <!-- IMAGE PREVIEW -->
+
+                <img
+                    id="preview"
+                    alt="Leaf Preview"
+                >
+
+
+                <!-- DETECT BUTTON -->
+
+                <button
+                    id="detectBtn"
+                    disabled
+                >
+                    🔍 Detect Disease
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- RESULT -->
+
+        <div
+            class="result-card"
+            id="resultCard"
+        >
+
+            <h2>
+                🌱 Detection Result
+            </h2>
+
+
+            <div class="result-row">
+
+                <strong>
+                    Crop:
+                </strong>
+
+                <span id="cropResult">
+                    -
+                </span>
+
+            </div>
+
+
+            <div class="result-row">
+
+                <strong>
+                    Disease:
+                </strong>
+
+                <span id="diseaseResult">
+                    -
+                </span>
+
+            </div>
+
+
+            <div class="result-row">
+
+                <strong>
+                    Confidence:
+                </strong>
+
+                <span
+                    id="confidenceResult"
+                    class="confidence"
+                >
+                    -
+                </span>
+
+            </div>
+
+
+            <div class="message-box">
+
+                <strong>
+                    Message:
+                </strong>
+
+                <span id="messageResult">
+                    -
+                </span>
+
+            </div>
+
+
+            <!-- CAUSE -->
+
+            <div class="info-section">
+
+                <h3>
+                    🔬 Cause
+                </h3>
+
+                <p id="causeResult">
+                    -
+                </p>
+
+            </div>
+
+
+            <!-- SYMPTOMS -->
+
+            <div class="info-section">
+
+                <h3>
+                    🩺 Symptoms
+                </h3>
+
+                <p id="symptomsResult">
+                    -
+                </p>
+
+            </div>
+
+
+            <!-- TREATMENT -->
+
+            <div class="info-section">
+
+                <h3>
+                    💊 Treatment
+                </h3>
+
+                <ul id="treatmentResult">
+                </ul>
+
+            </div>
+
+
+            <!-- PREVENTION -->
+
+            <div class="info-section">
+
+                <h3>
+                    🛡️ Prevention
+                </h3>
+
+                <ul id="preventionResult">
+                </ul>
+
+            </div>
+
+
+            <!-- TOP PREDICTIONS -->
+
+            <div class="info-section">
+
+                <h3>
+                    📊 Top Predictions
+                </h3>
+
+                <ol id="topPredictions">
+                </ol>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script
+        src="{{ url_for('static', filename='js/disease.js') }}"
+    ></script>
+
+</body>
+
+</html>

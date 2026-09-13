@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chatbot | AgroWise</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+<div class="logo"><span>🌱</span> AgroWise</div>
+<div class="nav-right">
+<a href="{{ url_for('dashboard') }}" class="back-link">← Dashboard</a>
+<a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+</div>
+</header>
+
+<main class="chatbot-container">
+<h1>🤖 AgroWise Assistant</h1>
+<p class="subtitle">Ask anything about crops, weather, prices, or diseases.</p>
+
+<div id="chat-window" class="chat-window"></div>
+
+<form id="chat-form">
+<input type="text" id="chat-input" placeholder="Type your question here..." required autocomplete="off">
+<button type="submit">Send</button>
+</form>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js"></script>
+<script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+</body>
+</html>
